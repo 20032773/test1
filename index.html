@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 翻譯聊天室 - 設定</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #2d3436 0%, #1e272e 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 16px;
+        }
+
+        .container {
+            background: #353b48;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            max-width: 600px;
+            width: 100%;
+            padding: 32px 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        h1 {
+            color: #f39c12;
+            font-size: 28px;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .subtitle {
+            color: #bbb;
+            text-align: center;
+            margin-bottom: 24px;
+            font-size: 15px;
+        }
+
+        .security-notice {
+            background: rgba(255, 193, 7, 0.1);
+            border: 1px solid #f39c12;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 20px;
+            color: #f39c12;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .security-notice strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .section {
+            margin-bottom: 24px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #f39c12;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        label {
+            display: block;
+            color: #ddd;
+            font-size: 13px;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            font-size: 14px;
+            background: rgba(0, 0, 0, 0.3);
+            color: #fff;
+            transition: all 0.3s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #f39c12;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        option {
+            background: #353b48;
+            color: #fff;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(243, 156, 18, 0.4);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .error {
+            color: #ff6b6b;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .loading-spinner {
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-top: 4px solid #f39c12;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        .loading p {
+            color: #ddd;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .help-text {
+            font-size: 11px;
+            color: #888;
+            margin-top: 5px;
+        }
+
+        .help-link {
+            color: #f39c12;
+            text-decoration: none;
+        }
+
+        .help-link:hover {
+            text-decoration: underline;
+        }
+
+        /* 桌面版優化 */
+        @media (min-width: 769px) {
+            body {
+                padding: 20px;
+            }
+
+            .container {
+                padding: 40px;
+            }
+
+            h1 {
+                font-size: 32px;
+                margin-bottom: 10px;
+            }
+
+            .subtitle {
+                font-size: 16px;
+                margin-bottom: 30px;
+            }
+
+            .security-notice {
+                font-size: 13px;
+            }
+
+            .section {
+                margin-bottom: 30px;
+            }
+
+            .section-title {
+                font-size: 18px;
+                margin-bottom: 15px;
+            }
+
+            .form-group {
+                margin-bottom: 15px;
+            }
+
+            label {
+                font-size: 14px;
+                margin-bottom: 5px;
+            }
+
+            input, select {
+                padding: 12px 16px;
+                font-size: 15px;
+            }
+
+            .btn-primary {
+                padding: 16px;
+                font-size: 18px;
+            }
+
+            .help-text {
+                font-size: 12px;
+            }
+        }
+
+        /* 手機版特殊優化 */
+        @media (max-width: 480px) {
+            body {
+                padding: 12px;
+            }
+
+            .container {
+                padding: 24px 16px;
+                border-radius: 12px;
+            }
+
+            h1 {
+                font-size: 24px;
+                margin-bottom: 6px;
+            }
+
+            .subtitle {
+                font-size: 14px;
+                margin-bottom: 20px;
+            }
+
+            .security-notice {
+                font-size: 11px;
+                padding: 10px;
+            }
+
+            .section {
+                margin-bottom: 20px;
+            }
+
+            .section-title {
+                font-size: 15px;
+                margin-bottom: 10px;
+            }
+
+            .form-group {
+                margin-bottom: 12px;
+            }
+
+            label {
+                font-size: 12px;
+                margin-bottom: 4px;
+            }
+
+            input, select {
+                padding: 10px 12px;
+                font-size: 13px;
+            }
+
+            .btn-primary {
+                padding: 12px;
+                font-size: 15px;
+            }
+
+            .error {
+                font-size: 11px;
+            }
+
+            .help-text {
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌍 AI 翻譯聊天室</h1>
+        <p class="subtitle">請完成以下設定以開始使用</p>
+
+        <div class="security-notice">
+            <strong>🔒 安全提示</strong>
+            請使用您自己的 API 密鑰。密鑰僅存儲在您的瀏覽器本地，不會上傳到任何服務器。建議定期更換密鑰以確保安全。
+        </div>
+
+        <form id="setupForm">
+            <!-- 用戶信息 -->
+            <div class="section">
+                <div class="section-title">👤 用戶信息</div>
+                <div class="form-group">
+                    <label for="username">用戶名 *</label>
+                    <input type="text" id="username" placeholder="輸入您的用戶名" required>
+                    <div class="error" id="usernameError">請輸入用戶名（2-20字符）</div>
+                </div>
+                <div class="form-group">
+                    <label for="language">語言 *</label>
+                    <select id="language" required>
+                        <option value="zh-TW">繁體中文 🇹🇼</option>
+                        <option value="en">English 🇺🇸</option>
+                        <option value="ja">日本語 🇯🇵</option>
+                        <option value="ko">한국어 🇰🇷</option>
+                        <option value="es">Español 🇪🇸</option>
+                        <option value="fr">Français 🇫🇷</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="room">選擇房間 *</label>
+                    <select id="room" required>
+                        <option value="room-1">房間 1</option>
+                        <option value="room-2">房間 2</option>
+                        <option value="room-3">房間 3</option>
+                        <option value="room-4">房間 4</option>
+                        <option value="room-5">房間 5</option>
+                        <option value="room-6">房間 6</option>
+                        <option value="room-7">房間 7</option>
+                        <option value="room-8">房間 8</option>
+                        <option value="room-9">房間 9</option>
+                        <option value="room-10">房間 10</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Firebase 配置 -->
+            <div class="section">
+                <div class="section-title">🔥 Firebase 配置</div>
+                <div class="form-group">
+                    <label for="firebaseApiKey">API Key *</label>
+                    <input type="text" id="firebaseApiKey" placeholder="YOUR_FIREBASE_API_KEY" required>
+                    <div class="help-text">
+                        需要幫助？<a href="https://console.firebase.google.com" target="_blank" class="help-link">前往 Firebase Console</a>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="firebaseProjectId">Project ID *</label>
+                    <input type="text" id="firebaseProjectId" placeholder="your-project-id" required>
+                </div>
+                <div class="form-group">
+                    <label for="firebaseDatabaseUrl">Database URL *</label>
+                    <input type="text" id="firebaseDatabaseUrl" placeholder="https://your-project-id.firebaseio.com" required>
+                </div>
+            </div>
+
+            <!-- Gemini API -->
+            <div class="section">
+                <div class="section-title">🤖 Gemini AI 配置</div>
+                <div class="form-group">
+                    <label for="geminiApiKey">API Key *</label>
+                    <input type="text" id="geminiApiKey" placeholder="YOUR_GEMINI_API_KEY" required>
+                    <div class="help-text">
+                        需要幫助？<a href="https://aistudio.google.com/apikey" target="_blank" class="help-link">前往 Google AI Studio</a>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-primary">保存並進入聊天室</button>
+        </form>
+
+        <div class="loading" id="loading">
+            <div class="loading-spinner"></div>
+            <p>正在進入聊天室...</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('setupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value.trim();
+            const language = document.getElementById('language').value;
+            const room = document.getElementById('room').value;
+            const firebaseApiKey = document.getElementById('firebaseApiKey').value.trim();
+            const firebaseProjectId = document.getElementById('firebaseProjectId').value.trim();
+            const firebaseDatabaseUrl = document.getElementById('firebaseDatabaseUrl').value.trim();
+            const geminiApiKey = document.getElementById('geminiApiKey').value.trim();
+
+            if (username.length < 2 || username.length > 20) {
+                document.getElementById('usernameError').style.display = 'block';
+                return;
+            }
+
+            if (!username || !firebaseApiKey || !firebaseProjectId || !firebaseDatabaseUrl || !geminiApiKey) {
+                alert('請填寫所有必填項');
+                return;
+            }
+
+            const config = {
+                user: {
+                    username: username,
+                    language: language,
+                    userId: 'user-' + Math.random().toString(36).substr(2, 9)
+                },
+                currentRoom: room,
+                config: {
+                    firebase: {
+                        apiKey: firebaseApiKey,
+                        projectId: firebaseProjectId,
+                        databaseURL: firebaseDatabaseUrl
+                    },
+                    geminiApiKey: geminiApiKey
+                },
+                isConfigured: true
+            };
+
+            localStorage.setItem('chatAppData', JSON.stringify(config));
+
+            document.querySelector('.container').style.display = 'none';
+            document.getElementById('loading').style.display = 'block';
+
+            setTimeout(() => {
+                window.location.href = 'chat.html';
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
